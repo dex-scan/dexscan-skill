@@ -4,11 +4,11 @@
  *
  * ACCESS-KEY 获取优先级（从高到低）：
  * 1. 操作系统环境变量：DS_ACCESS_KEY
- * 2. js文件全局变量默认值：e562239ecfd845a4bf3b4cad533f8d2b
+ * 2. js文件全局变量默认值：DEFAULT_ACCESS_KEY
  *
  * SECRET-KEY 获取优先级（从高到低）：
  * 1. 操作系统环境变量：DS_SECRET_KEY
- * 2. js文件全局变量默认值：de7b589f7628452c84f90ff370facfb3
+ * 2. js文件全局变量默认值：DEFAULT_SECRET_KEY
  */
 
 const crypto = require('crypto');
