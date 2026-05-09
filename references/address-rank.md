@@ -4,7 +4,7 @@
 
 ## 接口信息
 
-**接口地址**: `POST /v3/base/address-rank-page`
+**接口地址**: `POST /v3/base/address/address-rank-page`
 
 **接口描述**: 查询地址盈亏排行榜，支持多条件筛选和排序
 
