@@ -4,7 +4,7 @@
 
 ## 1. 游标查询地址交易历史列表
 
-**接口地址**: `POST /v3/base/address/address-trade-scroll`
+**接口地址**: `POST /v3/address/address-trade-scroll`
 
 **接口描述**: 游标分页查询指定钱包地址的历史交易盈亏记录
 
@@ -93,7 +93,7 @@
 
 ## 2. 分页查询地址盈亏分析列表
 
-**接口地址**: `POST /v3/base/address/address-list`
+**接口地址**: `POST /v3/address/address-list`
 
 **接口描述**: 分页查询钱包地址的各代币持仓盈亏情况，支持多维度过滤和排序
 
@@ -209,7 +209,7 @@
 
 ## 3. 分页查询地址资产组合列表
 
-**接口地址**: `POST /v3/base/address/address-asset-top`
+**接口地址**: `POST /v3/address/address-asset-top`
 
 **接口描述**: 分页查询钱包地址的持仓资产列表，按持仓价值降序排列
 
@@ -270,7 +270,7 @@
 
 ## 4. 分页查询地址开发者代币列表
 
-**接口地址**: `POST /v3/base/address/developer-page`
+**接口地址**: `POST /v3/address/developer-page`
 
 **接口描述**: 分页查询指定开发者地址创建的代币列表，支持排序
 

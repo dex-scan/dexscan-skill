@@ -12,11 +12,11 @@
  */
 
 const crypto = require('crypto');
-const BASE_URI = 'http://192.168.224.29/api';
+const BASE_URI = 'https://openapi.dexscan.trade';
 
 // 全局变量默认值（环境变量不存在时使用）
-const DEFAULT_ACCESS_KEY = 'e562239ecfd845a4bf3b4cad533f8d2b';
-const DEFAULT_SECRET_KEY = 'de7b589f7628452c84f90ff370facfb3';
+const DEFAULT_ACCESS_KEY = '3b13a13c8dc541e39ff8089db40cabf6';
+const DEFAULT_SECRET_KEY = '43e14928cec443c3b2a13a7603331e03';
 
 /**
  * 时间戳转换为 yyyy-MM-dd HH:mm:ss 格式
@@ -165,7 +165,7 @@ async function apiPost(path, data = {}) {
 
 /**
  * 信号列表查询（分页查询）
- * 接口地址: POST /v3/base/coin-signal-scroll
+ * 接口地址: POST /v3/coin-signal-scroll
  * 接口描述: 查询24小时信号，支持游标分页，每页返回20条
  * @param {object} options - 查询参数
  * @param {string} [options.chainName] - 链名称 (SOL/BSC/Base/ETH/Polygon/Arbitrum/Optimism/Avalanche/Monad/SUI)
@@ -176,7 +176,7 @@ async function apiPost(path, data = {}) {
  */
 async function querySignalList(options = {}) {
     const { chainName, cursor } = options;
-    return apiPost('/v3/base/coin-signal-scroll', {
+    return apiPost('/v3/coin-signal-scroll', {
         chainName,
         cursor
     });
@@ -184,7 +184,7 @@ async function querySignalList(options = {}) {
 
 /**
  * 信号排行榜查询
- * 接口地址: POST /v3/base/coin-signal-rank
+ * 接口地址: POST /v3/coin-signal-rank
  * 接口描述: 查询24小时信号排行榜TOP10，基于首次信号最大涨幅降序，最新信号推送时间降序。
  * @param {object} options - 查询参数
  * @param {string} [options.chainName] - 链名称
@@ -192,7 +192,7 @@ async function querySignalList(options = {}) {
  */
 async function querySignalRank(options = {}) {
     const { chainName } = options;
-    return apiPost('/v3/base/coin-signal-rank', {
+    return apiPost('/v3/coin-signal-rank', {
         chainName
     });
 }
@@ -201,7 +201,7 @@ async function querySignalRank(options = {}) {
 
 /**
  * 地址牛人榜查询
- * 接口地址: POST /v3/base/address-rank-page
+ * 接口地址: POST /v3/address-rank-page
  * 接口描述: 查询地址盈亏排行榜，支持多条件筛选和排序
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名称
@@ -254,14 +254,14 @@ async function queryAddressRank(options = {}) {
     if (minValue !== undefined) params.minValue = minValue;
     if (maxValue !== undefined) params.maxValue = maxValue;
 
-    return apiPost('/v3/base/address-rank-page', params);
+    return apiPost('/v3/address-rank-page', params);
 }
 
 // ==================== 热度接口 ====================
 
 /**
  * 社交热度列表查询
- * 接口地址: POST /v3/base/coin-heat-page
+ * 接口地址: POST /v3/coin-heat-page
  * 接口描述: 社交热度列表，支持分页和排序
  * @param {object} options - 查询参数
  * @param {number} options.page - 页数
@@ -295,42 +295,25 @@ async function queryCoinHeatPage(options = {}) {
     if (onlyLookNewCoin !== undefined) params.onlyLookNewCoin = onlyLookNewCoin;
     if (filtrationBlueChipCoin !== undefined) params.filtrationBlueChipCoin = filtrationBlueChipCoin;
 
-    return apiPost('/v3/base/coin-heat-page', params);
-}
-
-/**
- * 最新热度数据查询
- * 接口地址: POST /v3/base/coin-last-heat
- * 接口描述: 查询最新热度数据
- * @param {object} options - 查询参数
- * @param {string} options.chainName - 链类型（BSC/SOL）
- * @param {number} options.limit - 数据条数
- * @returns {Promise<any>}
- */
-async function queryCoinLastHeat(options = {}) {
-    const { chainName, limit } = options;
-    return apiPost('/v3/base/coin-last-heat', {
-        chainName,
-        limit
-    });
+    return apiPost('/v3/coin-heat-page', params);
 }
 
 /**
  * 推文热度数据查询
- * 接口地址: POST /v3/base/twitter-tweets-heat
+ * 接口地址: POST /v3/twitter-tweets-heat
  * 接口描述: 查询推文热度数据
  * @param {Array} tweetIds - 推文ID列表
  * @returns {Promise<any>}
  */
 async function queryTwitterTweetsHeat(tweetIds = []) {
-    return apiPost('/v3/base/twitter-tweets-heat', tweetIds);
+    return apiPost('/v3/twitter-tweets-heat', tweetIds);
 }
 
 // ==================== 行情接口 ====================
 
 /**
  * 分页查询代币排行
- * 接口地址: POST /v3/base/market/coin-rank
+ * 接口地址: POST /v3/market/coin-rank
  * 接口描述: 按时间粒度分页查询代币排行榜，支持过滤和排序
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名，ALL查全链
@@ -415,12 +398,12 @@ async function queryCoinRank(options = {}) {
     if (minCreateDuration !== undefined) params.minCreateDuration = minCreateDuration;
     if (maxCreateDuration !== undefined) params.maxCreateDuration = maxCreateDuration;
 
-    return apiPost('/v3/base/market/coin-rank', params);
+    return apiPost('/v3/market/coin-rank', params);
 }
 
 /**
  * 游标查询交易活动列表
- * 接口地址: POST /v3/base/market/trade-scroll
+ * 接口地址: POST /v3/market/trade-scroll
  * 接口描述: 游标分页查询指定代币的链上交易记录
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -465,12 +448,12 @@ async function queryTradeScroll(options = {}) {
     if (size !== undefined) params.size = size;
     if (cursor) params.cursor = cursor;
 
-    return apiPost('/v3/base/market/trade-scroll', params);
+    return apiPost('/v3/market/trade-scroll', params);
 }
 
 /**
  * 游标查询流动性变化列表
- * 接口地址: POST /v3/base/market/liquid-scroll
+ * 接口地址: POST /v3/market/liquid-scroll
  * 接口描述: 游标分页查询指定代币的流动性添加/移除记录
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -515,12 +498,12 @@ async function queryLiquidScroll(options = {}) {
     if (size !== undefined) params.size = size;
     if (cursor) params.cursor = cursor;
 
-    return apiPost('/v3/base/market/liquid-scroll', params);
+    return apiPost('/v3/market/liquid-scroll', params);
 }
 
 /**
  * 查询代币盈利列表
- * 接口地址: POST /v3/base/market/pnl-coin-list
+ * 接口地址: POST /v3/market/pnl-coin-list
  * 接口描述: 查询指定代币的持仓地址盈亏数据列表
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -544,12 +527,12 @@ async function queryPnlCoinList(options = {}) {
     if (holderList !== undefined) params.holderList = holderList;
     if (addresses) params.addresses = addresses;
 
-    return apiPost('/v3/base/market/pnl-coin-list', params);
+    return apiPost('/v3/market/pnl-coin-list', params);
 }
 
 /**
  * 游标查询开发者代币列表
- * 接口地址: POST /v3/base/market/developer-scroll
+ * 接口地址: POST /v3/market/developer-scroll
  * 接口描述: 游标分页查询指定代币的关联开发者创建的代币列表
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -573,12 +556,12 @@ async function queryDeveloperScroll(options = {}) {
     if (cursor !== undefined) params.cursor = cursor;
     if (needStats !== undefined) params.needStats = needStats;
 
-    return apiPost('/v3/base/market/developer-scroll', params);
+    return apiPost('/v3/market/developer-scroll', params);
 }
 
 /**
  * 查询代币近期统计信息
- * 接口地址: POST /v3/base/market/coin-summary
+ * 接口地址: POST /v3/market/coin-summary
  * 接口描述: 查询代币近期统计信息
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -590,12 +573,12 @@ async function queryCoinSummary(options = {}) {
     const { chainName, tokenContractAddress, bars } = options;
     const params = { chainName, tokenContractAddress };
     if (bars) params.bars = bars;
-    return apiPost('/v3/base/market/coin-summary', params);
+    return apiPost('/v3/market/coin-summary', params);
 }
 
 /**
  * 查询代币信息
- * 接口地址: POST /v3/base/market/coin-info
+ * 接口地址: POST /v3/market/coin-info
  * 接口描述: 查询代币详细信息
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -604,7 +587,7 @@ async function queryCoinSummary(options = {}) {
  */
 async function queryCoinInfo(options = {}) {
     const { chainName, tokenContractAddress } = options;
-    return apiPost('/v3/base/market/coin-info', {
+    return apiPost('/v3/market/coin-info', {
         chainName,
         tokenContractAddress
     });
@@ -612,7 +595,7 @@ async function queryCoinInfo(options = {}) {
 
 /**
  * 查询K线历史数据
- * 接口地址: POST /v3/base/market/kline-historical
+ * 接口地址: POST /v3/market/kline-historical
  * 接口描述: 查询代币K线历史数据
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -631,7 +614,7 @@ async function queryKlineHistorical(options = {}) {
         end
     } = options;
 
-    return apiPost('/v3/base/market/kline-historical', {
+    return apiPost('/v3/market/kline-historical', {
         chainName,
         tokenContractAddress,
         interval,
@@ -642,7 +625,7 @@ async function queryKlineHistorical(options = {}) {
 
 /**
  * 查询Meme代币排行列表
- * 接口地址: POST /v3/base/market/meme-rank
+ * 接口地址: POST /v3/market/meme-rank
  * 接口描述: 查询Meme代币排行列表
  * @param {object} options - 查询参数
  * @param {string} [options.chainName] - 链名
@@ -658,12 +641,12 @@ async function queryMemeRank(options = {}) {
     if (order) params.order = order;
     if (page !== undefined) params.page = page;
     if (pageSize !== undefined) params.pageSize = pageSize;
-    return apiPost('/v3/base/market/meme-rank', params);
+    return apiPost('/v3/market/meme-rank', params);
 }
 
 /**
  * 查询Meme支持的DEX列表
- * 接口地址: POST /v3/base/market/meme-dexs
+ * 接口地址: POST /v3/market/meme-dexs
  * 接口描述: 查询Meme代币支持的DEX列表
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -672,7 +655,7 @@ async function queryMemeRank(options = {}) {
  */
 async function queryMemeDexs(options = {}) {
     const { chainName, tokenContractAddress } = options;
-    return apiPost('/v3/base/market/meme-dexs', {
+    return apiPost('/v3/market/meme-dexs', {
         chainName,
         tokenContractAddress
     });
@@ -682,7 +665,7 @@ async function queryMemeDexs(options = {}) {
 
 /**
  * 游标查询地址交易历史列表
- * 接口地址: POST /v3/base/address/address-trade-scroll
+ * 接口地址: POST /v3/address/address-trade-scroll
  * 接口描述: 游标分页查询指定钱包地址的历史交易盈亏记录
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -709,12 +692,12 @@ async function queryAddressTradeScroll(options = {}) {
     if (size !== undefined) params.size = size;
     if (cursor) params.cursor = cursor;
 
-    return apiPost('/v3/base/address/address-trade-scroll', params);
+    return apiPost('/v3/address/address-trade-scroll', params);
 }
 
 /**
  * 分页查询地址盈亏分析列表
- * 接口地址: POST /v3/base/address/address-list
+ * 接口地址: POST /v3/address/address-list
  * 接口描述: 分页查询钱包地址的各代币持仓盈亏情况，支持多维度过滤和排序
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -762,12 +745,12 @@ async function queryAddressList(options = {}) {
     if (minTotalPnlRatio !== undefined) params.minTotalPnlRatio = minTotalPnlRatio;
     if (maxTotalPnlRatio !== undefined) params.maxTotalPnlRatio = maxTotalPnlRatio;
 
-    return apiPost('/v3/base/address/address-list', params);
+    return apiPost('/v3/address/address-list', params);
 }
 
 /**
  * 分页查询地址资产组合列表
- * 接口地址: POST /v3/base/address/address-asset-top
+ * 接口地址: POST /v3/address/address-asset-top
  * 接口描述: 分页查询钱包地址的持仓资产列表，按持仓价值降序排列
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -788,12 +771,12 @@ async function queryAddressAssetTop(options = {}) {
     if (page !== undefined) params.page = page;
     if (pageSize !== undefined) params.pageSize = pageSize;
 
-    return apiPost('/v3/base/address/address-asset-top', params);
+    return apiPost('/v3/address/address-asset-top', params);
 }
 
 /**
  * 分页查询地址开发者代币列表
- * 接口地址: POST /v3/base/address/developer-page
+ * 接口地址: POST /v3/address/developer-page
  * 接口描述: 分页查询指定开发者地址创建的代币列表，支持排序
  * @param {object} options - 查询参数
  * @param {string} options.chainName - 链名
@@ -817,7 +800,7 @@ async function queryDeveloperPage(options = {}) {
     if (pageSize !== undefined) params.pageSize = pageSize;
     if (order) params.order = order;
 
-    return apiPost('/v3/base/address/developer-page', params);
+    return apiPost('/v3/address/developer-page', params);
 }
 
 // 导出方法
@@ -831,7 +814,6 @@ module.exports = {
     queryAddressRank,
     // 热度
     queryCoinHeatPage,
-    queryCoinLastHeat,
     queryTwitterTweetsHeat,
     // 行情
     queryCoinRank,
