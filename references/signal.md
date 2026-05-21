@@ -4,7 +4,7 @@
 
 ## 1. 信号列表查询
 
-**接口地址**: `POST /v3/base/coin-signal-scroll`
+**接口地址**: `POST /v3/coin-signal-scroll`
 
 **接口描述**: 查询24小时信号，支持游标分页，每页返回20条
 
@@ -151,7 +151,7 @@
 
 ## 2. 信号排行榜
 
-**接口地址**: `POST /v3/base/coin-signal-rank`
+**接口地址**: `POST /v3/coin-signal-rank`
 
 **接口描述**: 查询24小时信号排行榜TOP10，基于首次信号最大涨幅降序，最新信号推送时间降序。
 

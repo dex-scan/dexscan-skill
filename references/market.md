@@ -4,7 +4,7 @@
 
 ## 1. 分页查询代币排行
 
-**接口地址**: `POST /v3/base/market/coin-rank`
+**接口地址**: `POST /v3/market/coin-rank`
 
 **接口描述**: 按时间粒度分页查询代币排行榜，支持过滤和排序
 
@@ -138,7 +138,7 @@
 
 ## 2. 游标查询交易活动列表
 
-**接口地址**: `POST /v3/base/market/trade-scroll`
+**接口地址**: `POST /v3/market/trade-scroll`
 
 **接口描述**: 游标分页查询指定代币的链上交易记录
 
@@ -246,7 +246,7 @@
 
 ## 3. 游标查询流动性变化列表
 
-**接口地址**: `POST /v3/base/market/liquid-scroll`
+**接口地址**: `POST /v3/market/liquid-scroll`
 
 **接口描述**: 游标分页查询指定代币的流动性添加/移除记录
 
@@ -346,7 +346,7 @@
 
 ## 4. 查询代币盈利列表
 
-**接口地址**: `POST /v3/base/market/pnl-coin-list`
+**接口地址**: `POST /v3/market/pnl-coin-list`
 
 **接口描述**: 查询指定代币的持仓地址盈亏数据列表
 
@@ -461,7 +461,7 @@
 
 ## 5. 游标查询开发者代币列表
 
-**接口地址**: `POST /v3/base/market/developer-scroll`
+**接口地址**: `POST /v3/market/developer-scroll`
 
 **接口描述**: 游标分页查询指定代币的关联开发者创建的代币列表
 
@@ -583,7 +583,7 @@
 
 ## 6. 查询代币近期统计信息
 
-**接口地址**: `POST /v3/base/market/coin-summary`
+**接口地址**: `POST /v3/market/coin-summary`
 
 **接口描述**: 查询代币近期统计信息
 
@@ -670,7 +670,7 @@
 
 ## 7. 查询代币信息
 
-**接口地址**: `POST /v3/base/market/coin-info`
+**接口地址**: `POST /v3/market/coin-info`
 
 **接口描述**: 查询代币详细信息
 
@@ -752,7 +752,7 @@
 
 ## 8. 查询K线历史数据
 
-**接口地址**: `POST /v3/base/market/kline-historical`
+**接口地址**: `POST /v3/market/kline-historical`
 
 **接口描述**: 查询代币K线历史数据
 
@@ -804,7 +804,7 @@
 
 ## 9. 查询Meme代币排行列表
 
-**接口地址**: `POST /v3/base/market/meme-rank`
+**接口地址**: `POST /v3/market/meme-rank`
 
 **接口描述**: 查询Meme代币排行列表
 
@@ -875,7 +875,7 @@
 
 ## 10. 查询Meme支持的DEX列表
 
-**接口地址**: `POST /v3/base/market/meme-dexs`
+**接口地址**: `POST /v3/market/meme-dexs`
 
 **接口描述**: 查询Meme代币支持的DEX列表
 
